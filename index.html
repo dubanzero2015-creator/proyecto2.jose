@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoiceReport AI - Gestión Profesional de Reportes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="toastContainer" class="toast-container"></div>
+
+    <header>
+        <h1>🎙️ VoiceReport AI</h1>
+        <p>Sistema Avanzado de Transcripción, Clasificación y Auditoría de Reportes por Voz.</p>
+    </header>
+
+    <section class="kpi-container">
+        <div class="kpi-card">
+            <h3>Total Reportes</h3>
+            <p id="kpiTotal">0</p>
+        </div>
+        <div class="kpi-card open-cases">
+            <h3>Casos Abiertos</h3>
+            <p id="kpiOpen">0</p>
+        </div>
+        <div class="kpi-card urgent-cases">
+            <h3>Urgencia Alta</h3>
+            <p id="kpiUrgent">0</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="left-column">
+            <section class="card upload-section">
+                <h2>Nuevo Reporte de Voz</h2>
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="drop-zone" id="dropZone">
+                        <p>Arrastra tu archivo de audio aquí o haz clic para seleccionar</p>
+                        <span class="format-hint">Formatos permitidos: MP3, WAV, M4A (Máx. 60s)</span>
+                        <input type="file" id="audioFile" name="audio" accept="audio/mp3, audio/wav, audio/mpeg, audio/x-m4a" required hidden>
+                    </div>
+                    
+                    <div id="auditBadge" class="audit-badge hidden">
+                        <h3>📋 Auditoría de Archivo (Pre-subida)</h3>
+                        <p><strong>Nombre:</strong> <span id="auditName">-</span></p>
+                        <p><strong>Formato:</strong> <span id="auditType">-</span></p>
+                        <p><strong>Tamaño:</strong> <span id="auditSize">-</span></p>
+                        <p><strong>Duración:</strong> <span id="auditDuration">-</span></p>
+                    </div>
+
+                    <div id="statusIndicator" class="status-indicator hidden">
+                        <div class="spinner"></div>
+                        <p id="statusText">Preparando archivo...</p>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btnSubmit">Procesar Audio</button>
+                </form>
+            </section>
+        </div>
+
+        <div class="right-column">
+            <section class="card filter-section">
+                <h2>🔍 Panel de Consulta y Filtros</h2>
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label for="filterSearch">Buscar en Transcripción</label>
+                        <input type="text" id="filterSearch" placeholder="Ej: agua, luz, tubería...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterCategory">Categoría</label>
+                        <select id="filterCategory">
+                            <option value="todos">Todas las categorías</option>
+                            <option value="Plomería/Infraestructura">Plomería/Infraestructura</option>
+                            <option value="Electricidad">Electricidad</option>
+                            <option value="Convivencia">Convivencia</option>
+                            <option value="Aseo">Aseo</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filterUrgency">Urgencia</label>
+                        <select id="filterUrgency">
+                            <option value="todos">Todos los niveles</option>
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Baja">Baja</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card database-section">
+                <div class="section-header">
+                    <h2>Registros Procesados y Auditoría Interna</h2>
+                    <button id="btnRefresh" class="btn-secondary">🔄 Actualizar Lista</button>
+                </div>
+                
+                <div class="table-container">
+                    <table id="reportsTable">
+                        <thead>
+                            <tr>
+                                <th>ID / Auditoría</th>
+                                <th>Contenido Analizado</th>
+                                <th>Clasificación</th>
+                                <th>Urgencia</th>
+                                <th>Estado Reg.</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportsBody">
+                            </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

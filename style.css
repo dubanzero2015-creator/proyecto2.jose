@@ -1,0 +1,158 @@
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    --urgent: #ef4444;
+    --medium: #f59e0b;
+    --low: #10b981;
+    --success-bg: #f0fdf4;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 2rem 1rem 1rem 1rem;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+}
+
+/* RESUMEN DIARIO (KPIs) */
+.kpi-container {
+    max-width: 1400px;
+    margin: 1.5rem auto 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.kpi-card {
+    background: var(--card-bg);
+    padding: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    text-align: center;
+}
+.kpi-card h3 { margin: 0; font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase;}
+.kpi-card p { margin: 0.5rem 0 0 0; font-size: 2rem; font-weight: 700; color: var(--text-main); }
+.kpi-card.open-cases p { color: var(--primary); }
+.kpi-card.urgent-cases p { color: var(--urgent); }
+
+.container {
+    max-width: 1400px;
+    margin: 1.5rem auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media(min-width: 992px) {
+    .container { grid-template-columns: 400px 1fr; }
+}
+
+.card {
+    background: var(--card-bg);
+    padding: 1.75rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.drop-zone {
+    border: 2px dashed #cbd5e1;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #f8fafc;
+    transition: all 0.3s;
+}
+.drop-zone:hover { background: #eef2f6; border-color: var(--primary); }
+.format-hint { display: block; font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+/* PANEL DE FILTROS */
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.filter-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.filter-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+.filter-group input, .filter-group select {
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+/* AUDITORÍA Y ESTADOS */
+.audit-badge { background-color: #f1f5f9; border-left: 4px solid #475569; padding: 1rem; border-radius: 8px; margin-top: 1.5rem; font-size: 0.85rem; }
+.audit-badge h3 { margin: 0 0 0.5rem 0; font-size: 0.95rem; }
+.audit-badge p { margin: 0.25rem 0; color: #334155; }
+
+.status-indicator { display: flex; align-items: center; gap: 1rem; background-color: #eff6ff; border: 1px solid #bfdbfe; padding: 1rem; border-radius: 8px; margin-top: 1.5rem; }
+.status-indicator p { margin: 0; font-weight: 500; color: #1e40af; }
+.spinner { width: 24px; height: 24px; border: 3px solid #dbeafe; border-top: 3px solid #2563eb; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+.hidden { display: none !important; }
+
+button { width: 100%; padding: 0.85rem; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1.5rem; transition: background 0.2s; }
+.btn-primary { background-color: var(--primary); color: white; }
+.btn-primary:hover { background-color: var(--primary-hover); }
+.btn-secondary { background-color: #475569; color: white; width: auto; margin: 0; }
+
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.table-container { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+th { background-color: #f8fafc; color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+.audit-row { background-color: #f8fafc; font-size: 0.8rem; color: var(--text-muted); }
+.audit-row td { padding: 0.5rem 1rem; border-bottom: 2px solid var(--border-color); }
+
+.badge { padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700; }
+.badge.alta { background-color: #fee2e2; color: var(--urgent); }
+.badge.media { background-color: #fef3c7; color: var(--medium); }
+.badge.baja { background-color: #d1fae5; color: var(--low); }
+
+/* SISTEMA NOTIFICACIONES (TOAST) */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.toast {
+    background: #1e293b;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-left: 4px solid var(--low);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 280px;
+    animation: slideIn 0.3s ease-out forwards;
+}
+.toast.info { border-left-color: var(--primary); }
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
